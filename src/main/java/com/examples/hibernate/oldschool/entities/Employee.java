@@ -2,6 +2,7 @@ package com.examples.hibernate.oldschool.entities;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -18,6 +19,9 @@ public class Employee {
 
     @Column(name = "salary")
     private int salary;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Tool> tools;
 
     public Employee() {}
 
@@ -57,5 +61,13 @@ public class Employee {
 
     public void setSalary( int salary ) {
         this.salary = salary;
+    }
+
+    public Set<Tool> getTools() {
+        return tools;
+    }
+
+    public void setTools(Set<Tool> tools) {
+        this.tools = tools;
     }
 }
